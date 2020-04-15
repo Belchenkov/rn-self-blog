@@ -9,6 +9,11 @@ const PostScreen = () => {
     );
 };
 
+PostScreen.navigationOptions = {
+    headerTitle: 'Новость 1'
+};
+
+
 const styles = StyleSheet.create({
    center: {
        flex: 1,

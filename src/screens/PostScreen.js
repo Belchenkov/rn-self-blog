@@ -1,16 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet } from "react-native";
 
-const PostScreen = () => {
+const PostScreen = ({ navigation }) => {
+    const postId = navigation.getParam('postId');
+
     return (
         <View style={styles.center}>
-            <Text>PostScreen</Text>
+            <Text>{postId}</Text>
         </View>
     );
 };
 
-PostScreen.navigationOptions = {
-    headerTitle: 'Новость 1'
+PostScreen.navigationOptions = ({ navigation }) => {
+    const postId = navigation.getParam('postId');
+    const date = navigation.getParam('date');
+
+    return {
+        headerTitle: `Новость от ${new Date(date).toLocaleDateString()}`
+    }
 };
 
 

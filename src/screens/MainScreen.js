@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { DATA } from "../data";
 import { Post } from "../components/Post";
+import AppHeaderIcon from "../components/AppHeaderIcon";
 
 const MainScreen = ({ navigation }) => {
     const openPostHandler = post => {
@@ -27,7 +29,15 @@ const MainScreen = ({ navigation }) => {
 
 MainScreen.navigationOptions = {
     headerTitle: 'Новостной блог',
-    fontFamily: 'open-regular'
+    headerRight: (
+        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+            <Item
+                title="Take photo"
+                iconName="ios-camera"
+                onPress={() => console.log('Press Photo')}
+            />
+        </HeaderButtons>
+    )
 };
 
 const styles = StyleSheet.create({

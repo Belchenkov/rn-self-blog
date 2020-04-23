@@ -20,14 +20,14 @@ const MainScreen = ({ navigation }) => {
     );
 };
 
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Новостной блог',
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
             <Item
                 title="Take photo"
                 iconName="ios-camera"
-                onPress={() => console.log('Press Photo')}
+                onPress={() => console.log('Press Photo!!!')}
             />
         </HeaderButtons>
     ),
@@ -36,10 +36,10 @@ MainScreen.navigationOptions = {
             <Item
                 title="Toggle Drawer"
                 iconName="ios-menu"
-                onPress={() => console.log('Press Photo')}
+                onPress={() => navigation.toggleDrawer()}
             />
         </HeaderButtons>
     )
-};
+});
 
 export default MainScreen;

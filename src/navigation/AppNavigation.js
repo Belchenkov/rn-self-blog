@@ -4,11 +4,14 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import MainScreen from "../screens/MainScreen";
 import PostScreen from "../screens/PostScreen";
 import { THEME } from "../theme";
 import BookmarkedScreen from "../screens/BookmarkedScreen";
+import AboutScreen from "../screens/AboutScreen";
+import CreateScreen from "../screens/CreateScreen";
 
 const navigatorOptions = {
     defaultNavigationOptions: {
@@ -33,14 +36,14 @@ const bottomTabsConfig = {
     Post: {
         screen: PostNavigator,
         navigationOptions: {
-            tabBarOptions: 'Все',
+            tabBarLabel: 'Все',
             tabBarIcon: info => <Ionicons name="ios-albums" size={25} color={info.tintColor} />
         }
     },
     Booked: {
         screen: BookedNavigator,
         navigationOptions: {
-            tabBarOptions: 'Избранное',
+            tabBarLabel: 'Избранное',
             tabBarIcon: info => <Ionicons name="ios-star" size={25} color={info.tintColor} />
         }
     }
@@ -60,4 +63,16 @@ const BottomNavigator = Platform.OS === 'android'
         }
 });
 
-export const AppNavigation = createAppContainer(BottomNavigator);
+const MainNavigator = createDrawerNavigator({
+   PostTabs: {
+       screen: BottomNavigator
+   },
+   About: {
+       screen: AboutScreen
+   },
+   Create: {
+       screen: CreateScreen
+   }
+});
+
+export const AppNavigation = createAppContainer(MainNavigator);

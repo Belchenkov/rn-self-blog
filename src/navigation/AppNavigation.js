@@ -10,32 +10,24 @@ import PostScreen from "../screens/PostScreen";
 import { THEME } from "../theme";
 import BookmarkedScreen from "../screens/BookmarkedScreen";
 
-const PostNavigator = createStackNavigator({
-    Main: MainScreen,
-    Post: {
-        screen: PostScreen
-    }
-}, {
-    initialRouteName: 'Main',
+const navigatorOptions = {
     defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: THEME.MAIN_COLOR
         },
         headerTintColor: '#fff'
-}
-});
+    }
+};
+
+const PostNavigator = createStackNavigator({
+    Main: MainScreen,
+    Post: PostScreen
+}, navigatorOptions);
 
 const BookedNavigator = createStackNavigator({
     Booked: BookmarkedScreen,
     Post: PostScreen
-}, {
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: THEME.MAIN_COLOR
-        },
-        headerTintColor: '#fff'
-    }
-});
+}, navigatorOptions);
 
 const bottomTabsConfig = {
     Post: {

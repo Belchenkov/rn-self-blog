@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { DATA } from "../data";
 import { Post } from "../components/Post";
 import AppHeaderIcon from "../components/AppHeaderIcon";
+import PostList from "../components/PostList";
 
 const MainScreen = ({ navigation }) => {
     const openPostHandler = post => {
@@ -16,15 +16,7 @@ const MainScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.wrapper}>
-            <FlatList
-                data={DATA}
-                keyExtractor={post => post.id.toString()}
-                renderItem={({ item }) => (
-                    <Post post={item} onOpen={openPostHandler} />
-                )}
-            />
-        </View>
+       <PostList data={DATA} onOpen={openPostHandler} />
     );
 };
 
@@ -49,11 +41,5 @@ MainScreen.navigationOptions = {
         </HeaderButtons>
     )
 };
-
-const styles = StyleSheet.create({
-    wrapper: {
-       padding: 10
-   },
-});
 
 export default MainScreen;

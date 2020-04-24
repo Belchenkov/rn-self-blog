@@ -5,6 +5,7 @@ import { DATA } from "../data";
 import { Post } from "../components/Post";
 import AppHeaderIcon from "../components/AppHeaderIcon";
 import PostList from "../components/PostList";
+import { THEME } from "../theme";
 
 const MainScreen = ({ navigation }) => {
     const openPostHandler = post => {
@@ -22,6 +23,10 @@ const MainScreen = ({ navigation }) => {
 
 MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Новостной блог',
+    headerStyle: {
+        backgroundColor: THEME.MAIN_COLOR,
+        fontFamily: 'open-bold'
+    },
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
             <Item

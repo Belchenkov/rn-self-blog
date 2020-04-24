@@ -23,17 +23,17 @@ const BookmarkedScreen = ({ navigation }) => {
     );
 };
 
-BookmarkedScreen.navigationOptions = {
+BookmarkedScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Избранное',
     headerLeft: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
             <Item
                 title="Toggle Drawer"
                 iconName="ios-menu"
-                onPress={() => console.log('Press Photo')}
+                onPress={() => navigation.toggleDrawer()}
             />
         </HeaderButtons>
     )
-};
+});
 
 export default BookmarkedScreen;

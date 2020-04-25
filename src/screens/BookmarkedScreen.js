@@ -1,7 +1,7 @@
 import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from "react-redux";
 
-import { DATA } from "../data";
 import { Post } from "../components/Post";
 import AppHeaderIcon from "../components/AppHeaderIcon";
 import PostList from "../components/PostList";
@@ -14,10 +14,11 @@ const BookmarkedScreen = ({ navigation }) => {
             booked: post.booked
         });
     };
+    const bookedPosts = useSelector(state => state.post.bookedPosts);
 
     return (
         <PostList
-            data={DATA.filter(post => post.booked)}
+            data={bookedPosts}
             onOpen={openPostHandler}
         />
     );

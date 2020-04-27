@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
     View,
     StyleSheet,
@@ -9,14 +9,30 @@ import {
     Alert
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useDispatch, useSelector } from "react-redux";
 
-import { DATA } from "../data";
 import { THEME } from "../theme";
 import AppHeaderIcon from "../components/AppHeaderIcon";
+import { toggleBooked, removePost } from "../store/actions/post";
 
 const PostScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
     const postId = navigation.getParam('postId');
-    const post = DATA.find(p => p.id === postId);
+    const post = useSelector(state => state.post.allPosts.find(p => p.id === postId));
+
+    const booked = useSelector(state => state.post.bookedPosts.some(post => post.id === postId));
+
+    const toggleHandler = useCallback(() => {
+        dispatch(toggleBooked(postId));
+    }, [dispatch, postId]);
+
+    useEffect(() => {
+        navigation.setParams({ booked });
+    }, [booked])
+
+    useEffect(() => {
+        navigation.setParams({ toggleHandler });
+    }, [toggleHandler])
 
     const removeHandler = () => {
         Alert.alert(
@@ -30,11 +46,18 @@ const PostScreen = ({ navigation }) => {
                 {
                     text: 'Удалить',
                     style: 'destructive',
-                    onPress: () => {}
+                    onPress: () => {
+                        navigation.navigate('Main');
+                        dispatch(removePost(postId));
+                    }
                 }
             ]
         );
     };
+
+    if (!post) {
+        return null;
+    }
 
     return (
         <ScrollView style={styles.center}>
@@ -57,6 +80,7 @@ const PostScreen = ({ navigation }) => {
 PostScreen.navigationOptions = ({ navigation }) => {
     const date = navigation.getParam('date');
     const booked = navigation.getParam('booked');
+    const toggleHandler = navigation.getParam('toggleHandler');
     const iconName = booked ? 'ios-star' : 'ios-star-outline';
 
     return {
@@ -66,7 +90,7 @@ PostScreen.navigationOptions = ({ navigation }) => {
                 <Item
                     title="Take photo"
                     iconName={iconName}
-                    onPress={() => console.log('Press Photo')}
+                    onPress={() => toggleHandler()}
                 />
             </HeaderButtons>
         )

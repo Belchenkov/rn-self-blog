@@ -98,7 +98,7 @@ const MainNavigator = createDrawerNavigator({
     contentOptions: {
         activeTintColor: THEME.MAIN_COLOR,
             labelStyle: {
-            fontFamily: 'open-regular'
+            //fontFamily: 'open-regular'
         }
     }
 }

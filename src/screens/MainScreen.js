@@ -34,7 +34,7 @@ MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Новостной блог',
     headerStyle: {
         backgroundColor: THEME.MAIN_COLOR,
-        fontFamily: 'open-bold'
+        //fontFamily: 'open-bold'
     },
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>

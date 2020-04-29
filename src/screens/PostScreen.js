@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
        padding: 10
    },
    title: {
-       fontFamily: 'open-regular'
+      // fontFamily: 'open-regular'
    }
 });
 

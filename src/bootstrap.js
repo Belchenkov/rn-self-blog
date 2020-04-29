@@ -1,9 +1,18 @@
 import * as Font from 'expo-font';
 
+import { DB } from "./db";
+
 export async function bootstrap() {
-    await Font.loadAsync({
-       'open-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
-       'open-regular': require('../assets/fonts/OpenSans-Regular.ttf'),
-       'pattaya-regular': require('../assets/fonts/Pattaya-Regular.ttf')
-    });
+    try {
+        await Font.loadAsync({
+            'open-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
+            'open-regular': require('../assets/fonts/OpenSans-Regular.ttf'),
+            'pattaya-regular': require('../assets/fonts/Pattaya-Regular.ttf')
+        });
+
+        await DB.init();
+        console.log('Database started ...');
+    } catch (err) {
+        console.log(err);
+    }
 }

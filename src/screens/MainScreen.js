@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch, useSelector } from "react-redux";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 
 import { Post } from "../components/Post";
 import AppHeaderIcon from "../components/AppHeaderIcon";
@@ -24,6 +25,15 @@ const MainScreen = ({ navigation }) => {
     }, [dispatch]);
 
     const allPosts = useSelector(state => state.post.allPosts);
+    const loading = useSelector(state => state.post.loading);
+
+    if (loading) {
+        return (
+            <View style={styles.center}>
+                <ActivityIndicator color={THEME.MAIN_COLOR} />
+            </View>
+        );
+    }
 
     return (
        <PostList data={allPosts} onOpen={openPostHandler} />
@@ -34,7 +44,7 @@ MainScreen.navigationOptions = ({ navigation }) => ({
     headerTitle: 'Новостной блог',
     headerStyle: {
         backgroundColor: THEME.MAIN_COLOR,
-        fontFamily: 'open-bold'
+        //fontFamily: 'open-bold'
     },
     headerRight: (
         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
@@ -54,6 +64,14 @@ MainScreen.navigationOptions = ({ navigation }) => ({
             />
         </HeaderButtons>
     )
+});
+
+const styles = StyleSheet.create({
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
 
 export default MainScreen;

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     View,
     Text,
     StyleSheet,
     TextInput,
-    Image,
     Button,
     ScrollView,
     TouchableWithoutFeedback,
@@ -16,23 +15,27 @@ import { useDispatch } from "react-redux";
 import AppHeaderIcon from "../components/AppHeaderIcon";
 import { THEME } from "../theme";
 import { addPost } from "../store/actions/post";
+import { PhotoPicker } from "../components/PhotoPicker";
 
 const CreateScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const [text, setText] = useState('');
-
-    const img = '';
+    const imgRef = useRef();
 
     const saveHandler = () => {
         const post = {
             date: new Date().toJSON(),
             text,
-            img,
+            img: imgRef.current,
             booked: false
         };
 
         dispatch(addPost(post));
         navigation.navigate('Main');
+    };
+
+    const photoPickHandler = uri => {
+        imgRef.current = uri;
     };
 
     return (
@@ -47,14 +50,14 @@ const CreateScreen = ({ navigation }) => {
                         onChangeText={setText}
                         multiline
                     />
-                    <Image
-                        style={styles.image}
-                        source={{ uri: img }}
+                    <PhotoPicker
+                        onPick={photoPickHandler}
                     />
                     <Button
                         title="Создать"
                         color={THEME.MAIN_COLOR}
                         onPress={saveHandler}
+                        disabled={!text}
                     />
                 </View>
             </TouchableWithoutFeedback>

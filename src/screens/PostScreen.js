@@ -23,8 +23,8 @@ const PostScreen = ({ navigation }) => {
     const booked = useSelector(state => state.post.bookedPosts.some(post => post.id === postId));
 
     const toggleHandler = useCallback(() => {
-        dispatch(toggleBooked(postId));
-    }, [dispatch, postId]);
+        dispatch(toggleBooked(post));
+    }, [dispatch, post]);
 
     useEffect(() => {
         navigation.setParams({ booked });
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
        padding: 10
    },
    title: {
-       fontFamily: 'open-regular'
+      // fontFamily: 'open-regular'
    }
 });
 

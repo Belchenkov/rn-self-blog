@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#fff',
-        fontFamily: 'open-regular'
+        //fontFamily: 'open-regular'
     }
 });

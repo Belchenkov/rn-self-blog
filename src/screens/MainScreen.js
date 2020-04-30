@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useDispatch, useSelector } from "react-redux";
-import { View, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 
 import { Post } from "../components/Post";
 import AppHeaderIcon from "../components/AppHeaderIcon";

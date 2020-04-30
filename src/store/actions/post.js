@@ -31,10 +31,10 @@ export const toggleBooked = post => async dispatch => {
 export const removePost = id => async dispatch => {
     await DB.removePost(id);
 
-    return {
+    dispatch({
         type: REMOVE_POST,
         payload: id
-    }
+    });
 };
 
 export const addPost = post => async dispatch => {
@@ -56,6 +56,7 @@ export const addPost = post => async dispatch => {
     };
 
     payload.id = await DB.createPost(payload);
+
 
     dispatch({
         type: ADD_POST,

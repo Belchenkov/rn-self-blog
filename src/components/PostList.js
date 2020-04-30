@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, View, Text} from "react-native";
+import { FlatList, StyleSheet, View, Text } from "react-native";
 
 import { Post } from "./Post";
 
@@ -17,7 +17,7 @@ const PostList = ({ data, onOpen }) => {
         <View style={styles.wrapper}>
             <FlatList
                 data={data}
-                keyExtractor={post => post.id.toString()}
+                keyExtractor={post => post.id}
                 renderItem={({ item }) => (
                     <Post post={item} onOpen={onOpen} />
                 )}
